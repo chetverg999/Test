@@ -1,21 +1,13 @@
-package Generator;
+package generator;
 
-
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MainMenu {
 
     Scanner scanner = new Scanner(System.in);
-    static Generator generator = new Generator();
+    Generator generator = new Generator();
 
-    public static void main(String[] args) throws InterruptedException {
-        MainMenu menu = new MainMenu();
-        generator.start();
-        menu.menu();
-    }
-
-    public void menu()  {
+    public void menu() {
         System.out.println("Добро пожаловать в меню");
         while (true) {
 
@@ -23,7 +15,9 @@ public class MainMenu {
             System.out.println("1 - продолжить генерацию");
             System.out.println("2 - остановить генерацию");
             System.out.println("3 - вывести все данные");
-            System.out.println("4 - выход");
+            System.out.println("4 - вывести значения за последние 10 секунд");
+            System.out.println("5 - вывод всех номеров больших 5");
+            System.out.println("6 - выход");
 
             if (scanner.hasNextInt()) {
                 int a = scanner.nextInt();
@@ -39,44 +33,23 @@ public class MainMenu {
                         break;
                     case (3):
                         System.out.println("Вывод значений");
-                        Counter.printValues();
+                        generator.counter.printValues();
                         break;
                     case (4):
+                        System.out.println("Вывод значений за последние 10 секунд");
+                        generator.counter.printValuesPer10sec();
+                        break;
+                    case (5):
+                        System.out.println("Вывод всех номеров больших 5");
+                        generator.counter.printValues5();
+                        break;
+                    case (6):
                         System.exit(0);
                         break;
                 }
             } else {
                 System.out.println("Не та кнопка" + "\n" + "\n");
                 scanner.next();
-            }
-        }
-
-    }
-
-
-    static class Generator extends Thread {
-
-        long id = 0;
-        String date;
-        int number;
-        Map<Long, List<Object>> map = new LinkedHashMap<>();
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("E yyyy.MM.dd 'и время' hh:mm:ss a zzz");
-
-
-
-        public void run() {
-            while (true) {
-                id++;
-                number = (int) (Math.random() * 10);
-                date = formatForDateNow.format(dateNow);
-                map.put(id, Arrays.asList(number, date));
-                Counter.count.put(id, Arrays.asList(number, date));
-                try {
-//                        System.out.println("main::Sleeping");
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                }
             }
         }
     }
