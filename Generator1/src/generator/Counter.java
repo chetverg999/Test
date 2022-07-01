@@ -6,9 +6,13 @@ import java.util.Map;
 
 public class Counter {
 
-    Map<Long, Generator.Parametrs> count = new LinkedHashMap<>();
+    protected final Map<Long, Generator.Parametrs> count = new LinkedHashMap<>();
 
-    public void printValues() {
+    public Counter() {
+
+    }
+
+    public void printValues() {  // вывод всех сгенерированных, на данный момент, значений
         for (Map.Entry<Long, Generator.Parametrs> pair : count.entrySet()) {
             String key = String.valueOf(pair.getKey());
             Generator.Parametrs parametrs = pair.getValue();
@@ -16,7 +20,7 @@ public class Counter {
         }
     }
 
-    public void printValues5() {
+    public void printValues5() {  // вывод всех значений с нормером, большим 5
         for (Map.Entry<Long, Generator.Parametrs> pair : count.entrySet()) {
             String key = String.valueOf(pair.getKey());
             Generator.Parametrs parametrs = pair.getValue();
@@ -26,7 +30,7 @@ public class Counter {
         }
     }
 
-    public void printValuesPer10sec() {
+    public void printValuesPer10sec() {  // вывод всех значений, сгенерированных за последние 10 секунд
         Date now = new Date();
         for (Map.Entry<Long, Generator.Parametrs> pair : count.entrySet()) {
             String key = String.valueOf(pair.getKey());

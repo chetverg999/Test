@@ -4,11 +4,17 @@ import java.util.*;
 
 public class MainMenu {
 
-    Scanner scanner = new Scanner(System.in);
-    Generator generator = new Generator();
+    private Scanner scanner = new Scanner(System.in);
+    protected Generator generator = new Generator();
+
+    public MainMenu() {
+
+    }
 
     public void menu() {
+
         System.out.println("Добро пожаловать в меню");
+
         while (true) {
 
             System.out.println("Выберите действие");
