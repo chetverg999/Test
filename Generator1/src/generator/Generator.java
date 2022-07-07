@@ -5,43 +5,28 @@ import java.util.*;
 
 public class Generator extends Thread {
 
-    protected final Counter counter = new Counter();
+    protected Counter counter;
 
-    private long id = 0;
-    private String date;
-    private int number;
-    private Date dateNow;
-    private final Map<Long, Parametrs> map = new HashMap<>();
-    private SimpleDateFormat formatForDateNow = new SimpleDateFormat("E yyyy.MM.dd 'и время' hh:mm:ss a zzz");
+    private long id;
+    private Map<Long, Parameters> map;
+    private SimpleDateFormat formatForDateNow;
 
     public Generator() {
-
+        this.counter = new Counter();
+        this.id = 0;
+        this.map = new HashMap <>();
+        this.formatForDateNow = new SimpleDateFormat("E yyyy.MM.dd 'и время' hh:mm:ss a zzz");
     }
 
-    public class Parametrs {
-        protected int number;
-        protected String date;
-        protected Date dateNow;
-
-        public Parametrs(int number, String date, Date dateNow) {
-            this.number = number;
-            this.date = date;
-            this.dateNow = dateNow;
-        }
-
-        @Override
-        public String toString() {
-            return "  Номер: " + number + "  Дата: " + date + "]";
-        }
-    }
 
     public void run() {
         while (true) {
             id++;
-            number = (int) (Math.random() * 10);
-            date = formatForDateNow.format(dateNow = new Date());
-            map.put(id, new Parametrs(number, date, dateNow = new Date()));
-            counter.count.put(id, new Parametrs(number, date, dateNow = new Date()));
+            final Date dateNow = new Date();
+            final int number = (int) (Math.random() * 10);
+            final String date = formatForDateNow.format(dateNow);
+            map.put(id, new Parameters(number, date, dateNow));
+            counter.getCount().put(id, new Parameters(number, date, dateNow));
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {

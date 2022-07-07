@@ -4,12 +4,14 @@ import java.util.*;
 
 public class MainMenu {
 
-    private Scanner scanner = new Scanner(System.in);
-    protected Generator generator = new Generator();
+    private Scanner scanner;
+    protected Generator generator;
 
     public MainMenu() {
-
+        this.generator = new Generator();
+        this.scanner = new Scanner(System.in);
     }
+
 
     public void menu() {
 
