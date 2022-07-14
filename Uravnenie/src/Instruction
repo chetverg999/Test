@@ -1,0 +1,14 @@
+Порядок выполнения действий
+
+1. Скобки                      //    factor : NUMBER | '(' expression ')' ;
+2. Степень                     //    degree :  factor ^ factor;
+3. Умножение деление           //    multdiv : degree ( ( '*' | '/' ) degree );
+4. Сложение вычитание          //    plusminus: divMult ( ( '+' | '-' ) divMult );
+
+//    expression : plusminus * END ;  само выражение
+
+
+1. Скобки
+2. and
+3. or, xor
+.
