@@ -21,11 +21,20 @@ public class Panel extends JPanel {
         add(jTextFieldArifmetic);
         jTextFieldArifmetic.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                textFieldValueArifmetic = jTextFieldArifmetic.getText();
-                lexicalAnalysis.analysis(textFieldValueArifmetic);
-                ans = lexicalAnalysis.read();
-                answer.setText(ans);
+            public void actionPerformed(ActionEvent e) throws RuntimeException {
+                try {
+                    textFieldValueArifmetic = jTextFieldArifmetic.getText();
+                    lexicalAnalysis.analysis(textFieldValueArifmetic);
+                    ans = lexicalAnalysis.read();
+                    lexicalAnalysis.clear();
+                    answer.setText(ans);
+                }
+                catch (RuntimeException q) {
+                    answer.setText(q.getMessage());
+                }
+                finally {
+                    lexicalAnalysis.clear();
+                }
             }
         });
 
@@ -38,11 +47,20 @@ public class Panel extends JPanel {
         add(jTextFieldLogic);
         jTextFieldLogic.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                textFieldValueLogic = jTextFieldLogic.getText();
-                logicAnalysis.analysis(textFieldValueLogic);
-                ans = logicAnalysis.readLogic();
-                answer.setText(ans);
+            public void actionPerformed(ActionEvent e) throws RuntimeException {
+                try {
+                    textFieldValueLogic = jTextFieldLogic.getText();
+                    logicAnalysis.analysis(textFieldValueLogic);
+                    ans = logicAnalysis.readLogic();
+                    logicAnalysis.clearLogic();
+                    answer.setText(ans);
+                }
+                catch (RuntimeException q) {
+                    answer.setText(q.getMessage());
+                }
+                finally {
+                    logicAnalysis.clearLogic();
+                }
             }
         });
 

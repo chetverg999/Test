@@ -1,8 +1,5 @@
 package Uravnenie;
-
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class LogicAnalysis {
 
@@ -77,7 +74,7 @@ public class LogicAnalysis {
                 boolean value = orXor(list); // проверяем наличие действий в скобках
                 symbol = list.next(); // проверка правой скобки
                 if (symbol.type != CharacterType.RIGHT_BRACKET) {
-                    throw new RuntimeException("Unexpected token: ");
+                    throw new RuntimeException("Unexpected token: " + list.getPos());
                 }
                 return value; // возвращаем результат из скобок
 
@@ -143,6 +140,10 @@ public class LogicAnalysis {
 
     public String readLogic() {
         Buffer buffer = new Buffer(list);
-       return String.valueOf(expression(buffer));
+        return String.valueOf(expression(buffer));
+    }
+
+    public void clearLogic() {
+        list.clear();
     }
 }

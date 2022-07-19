@@ -11,7 +11,6 @@ public class LexicalAnalysis {
         this.list = new ArrayList<>();
     }
 
-
     public ArrayList<Symbol> analysis(String text) {
         int pos = 0; // позиция на которой сейчас смотрим символ
         while (pos < text.length()) {
@@ -93,7 +92,7 @@ public class LexicalAnalysis {
                 int value = plusMinus(list); // проверяем наличие действий в скобках (умножение и деление)
                 symbol = list.next(); // проверка правой скобки
                 if (symbol.type != CharacterType.RIGHT_BRACKET) {
-                    throw new RuntimeException("Unexpected token: ");
+                    throw new RuntimeException("Unexpected token: " + list.getPos());
                 }
                 return value; // возвращаем результат из скобок
 
@@ -187,8 +186,10 @@ public class LexicalAnalysis {
 
     public String read() {
         Buffer buffer = new Buffer(list);
-       return String.valueOf(expression(buffer));
+        return String.valueOf(expression(buffer));
     }
 
-
+    public void clear() {
+        list.clear();
+    }
 }
