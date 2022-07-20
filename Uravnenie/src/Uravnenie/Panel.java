@@ -20,6 +20,7 @@ public class Panel extends JPanel {
         JTextField jTextFieldArifmetic = new JTextField(25);
         add(jTextFieldArifmetic);
         jTextFieldArifmetic.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) throws RuntimeException {
                 try {
@@ -28,11 +29,9 @@ public class Panel extends JPanel {
                     ans = lexicalAnalysis.read();
                     lexicalAnalysis.clear();
                     answer.setText(ans);
-                }
-                catch (RuntimeException q) {
+                } catch (RuntimeException q) {
                     answer.setText(q.getMessage());
-                }
-                finally {
+                } finally {
                     lexicalAnalysis.clear();
                 }
             }
@@ -46,6 +45,7 @@ public class Panel extends JPanel {
         JTextField jTextFieldLogic = new JTextField(25);
         add(jTextFieldLogic);
         jTextFieldLogic.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) throws RuntimeException {
                 try {
@@ -54,11 +54,9 @@ public class Panel extends JPanel {
                     ans = logicAnalysis.readLogic();
                     logicAnalysis.clearLogic();
                     answer.setText(ans);
-                }
-                catch (RuntimeException q) {
+                } catch (RuntimeException q) {
                     answer.setText(q.getMessage());
-                }
-                finally {
+                } finally {
                     logicAnalysis.clearLogic();
                 }
             }
@@ -67,4 +65,5 @@ public class Panel extends JPanel {
         add(new JLabel("Ответ:"));
         add(answer);
     }
+
 }
