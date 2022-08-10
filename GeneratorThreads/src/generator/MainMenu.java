@@ -5,15 +5,16 @@ import java.util.*;
 public class MainMenu {
 
     private final Scanner scanner;
-    private final GenThreads genThreads;
+    private final Threads threads;
 
     public MainMenu() {
-        this.genThreads = new GenThreads();
         this.scanner = new Scanner(System.in);
+        this.threads = new Threads();
     }
 
-    public GenThreads getGenThreads() {
-        return genThreads;
+
+    public Threads getThreads() {
+        return threads;
     }
 
     public void menu() {
@@ -35,27 +36,25 @@ public class MainMenu {
 
                 switch (a) {
                     case (1):
-                        genThreads.setStatus(true);
-                        synchronized (genThreads.getSync()) {
-                            genThreads.getSync().notifyAll();
-                        }
-                        System.out.println("Генерация продолжается");
+                        getThreads().setStatus(true);
+                        getThreads().genThreads();
+                        System.out.println("Генерация начинается");
                         break;
                     case (2):
-                        genThreads.setStatus(false);
+                        getThreads().setStatus(false);
                         System.out.println("Генерация остановлена");
                         break;
                     case (3):
                         System.out.println("Вывод значений");
-                        genThreads.getCounter().printValues();
+                        getThreads().getCounter().printValues();
                         break;
                     case (4):
                         System.out.println("Вывод значений за последние 10 секунд");
-                        genThreads.getCounter().printValuesPer10sec();
+                        getThreads().getCounter().printValuesPer10sec();
                         break;
                     case (5):
                         System.out.println("Вывод всех номеров больших 5");
-                        genThreads.getCounter().printValues5();
+                        getThreads().getCounter().printValues5();
                         break;
                     case (6):
                         System.exit(0);
