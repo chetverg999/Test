@@ -1,4 +1,13 @@
 public class Student implements Runnable {
+
+    public void status() {
+        System.out.println("Класс математики " + Main.consumer.classes.getMath().size() + "\n" +
+                "Класс физики " + Main.consumer.classes.getPhysics().size() + "\n" +
+                "Класс информатики " + Main.consumer.classes.getProgramming().size() + "\n" +
+                "Класс физры " + Main.consumer.classes.getPhysicalEducation().size() + "\n" +
+                "Класс литературы " + Main.consumer.classes.getLiterature().size());
+    }
+
     public void studentOnExamen() throws InterruptedException {
 
         boolean math = false;
@@ -6,65 +15,92 @@ public class Student implements Runnable {
         boolean physics = false;
         boolean literature = false;
         boolean physicalEducation = false;
+        int id = (int) (Math.random() * 100);
+        int group = 8111;
+        StudentInfo studentInfo = new StudentInfo(id, group);
+        M1:
+        {
+            while (true) {
 
-        while (true) {
+                first:
+                {
+                    if ((Main.consumer.classes.getSemaphoreMath().availablePermits() == 0) || (math == true)) {
+                        break first;
+                    } else {
+                        Main.consumer.classes.getSemaphoreMath().acquire();
+                        Main.consumer.classes.getMath().put(studentInfo);
+                        Thread.sleep(3000);
+                        System.out.println(Thread.currentThread().getName() + " сдал матешу");
+                        math = true;
+                        Main.consumer.classes.getSemaphoreMath().release();
+                    }
+                }
 
-            int id = (int) Math.random() * 100;
-            int group = 8111;
-            StudentInfo studentInfo = new StudentInfo(id, group);
+                second:
+                {
+                    if (Main.consumer.classes.getSemaphorePhysics().availablePermits() == 0 || physics == true) {
+                        break second;
+                    } else {
+                        Main.consumer.classes.getSemaphorePhysics().acquire();
+                        Main.consumer.classes.getPhysics().put(studentInfo);
+                        Thread.sleep(3000);
+                        System.out.println(Thread.currentThread().getName() + " сдал физику");
+                        physics = true;
+                        Main.consumer.classes.getSemaphorePhysics().release();
+                    }
+                }
 
-            if ((Main.consumer.classes.getSemaphoreMath().availablePermits() == 0) || (math == true)) {
-                continue;
-            } else {
-                Main.consumer.classes.getSemaphoreMath().acquire();
-                Main.consumer.classes.getMath().put(studentInfo);
-                System.out.println(Thread.currentThread().getName() + " сдал матешу");
-                math = true;
-                Main.consumer.classes.getSemaphoreMath().release();
+                third:
+                {
+                    if (Main.consumer.classes.getSemaphorePhysicalEducation().availablePermits() == 0 || physicalEducation == true) {
+                        break third;
+                    } else {
+                        Main.consumer.classes.getSemaphorePhysicalEducation().acquire();
+                        Main.consumer.classes.getPhysicalEducation().offer(studentInfo);
+                        Thread.sleep(3000);
+                        System.out.println(Thread.currentThread().getName() + " сдал физру");
+                        physicalEducation = true;
+                        Main.consumer.classes.getSemaphorePhysicalEducation().release();
+                    }
+                }
+
+                fourth:
+                {
+                    if (Main.consumer.classes.getSemaphoreLiterature().availablePermits() == 0 || literature == true) {
+                        break fourth;
+                    } else {
+                        Main.consumer.classes.getSemaphoreLiterature().acquire();
+                        Main.consumer.classes.getLiterature().offer(studentInfo);
+                        Thread.sleep(3000);
+                        System.out.println(Thread.currentThread().getName() + " сдал литру");
+                        literature = true;
+                        Main.consumer.classes.getSemaphoreLiterature().release();
+                    }
+                }
+
+                fifth:
+                {
+                    if (Main.consumer.classes.getSemaphoreProgramming().availablePermits() == 0 || programming == true) {
+                        break fifth;
+                    } else {
+                        Main.consumer.classes.getSemaphoreProgramming().acquire();
+                        Main.consumer.classes.getProgramming().offer(studentInfo);
+                        Thread.sleep(3000);
+                        System.out.println(Thread.currentThread().getName() + " сдал инфу");
+                        programming = true;
+                        Main.consumer.classes.getSemaphoreProgramming().release();
+                    }
+                }
+
+                status();
+
+                System.out.println(Thread.currentThread().getName() + " " + math + " " + physicalEducation + " " + programming + " " + physics + " " + literature);
+                if (programming == true && literature == true && physicalEducation == true && physics == true && math == true) {
+                    break M1;
+                }
             }
-
-            if (Main.consumer.classes.getSemaphorePhysics().availablePermits() == 0 || physics == true) {
-                continue;
-            } else {
-                Main.consumer.classes.getSemaphorePhysics().acquire();
-                Main.consumer.classes.getPhysics().put(studentInfo);
-                System.out.println(Thread.currentThread().getName() + " сдал физику");
-                physics = true;
-                Main.consumer.classes.getSemaphorePhysics().release();
-            }
-
-            if (Main.consumer.classes.getSemaphorePhysicalEducation().availablePermits() == 0 || physicalEducation == true) {
-                continue;
-            } else {
-                Main.consumer.classes.getSemaphorePhysicalEducation().acquire();
-                Main.consumer.classes.getPhysicalEducation().offer(studentInfo);
-                System.out.println(Thread.currentThread().getName() + " сдал физру");
-                physicalEducation = true;
-                Main.consumer.classes.getSemaphorePhysicalEducation().release();
-            }
-
-            if (Main.consumer.classes.getSemaphoreLiterature().availablePermits() == 0 || literature == true) {
-                continue;
-            } else {
-                Main.consumer.classes.getSemaphoreLiterature().acquire();
-                Main.consumer.classes.getLiterature().offer(studentInfo);
-                System.out.println(Thread.currentThread().getName() + " сдал литру");
-                literature = true;
-                Main.consumer.classes.getSemaphoreLiterature().release();
-            }
-
-            if (Main.consumer.classes.getSemaphoreProgramming().availablePermits() == 0 || programming == true) {
-                continue;
-            } else {
-                Main.consumer.classes.getSemaphoreProgramming().acquire();
-                Main.consumer.classes.getProgramming().offer(studentInfo);
-                System.out.println(Thread.currentThread().getName() + " сдал инфу");
-                programming = true;
-                Main.consumer.classes.getSemaphoreProgramming().release();
-            }
-
-            System.out.println(Thread.currentThread().getName() + math + physicalEducation + programming + physics + literature);
         }
+        status();
     }
 
     @Override
