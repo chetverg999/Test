@@ -6,6 +6,13 @@ public class StudentInfo {
         this.id = id;
         this.group = group;
     }
+
+    @Override
+    public String toString() {
+        return
+                "id=" + id +
+                ", group=" + group;
+    }
 }
 
 

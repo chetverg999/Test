@@ -1,7 +1,10 @@
 public class Main {
+
+    static Consumer consumer = new Consumer();
+    static Student student = new Student();
+
     public static void main(String[] args) {
-        Consumer consumer = new Consumer();
-        Student student = new Student();
+
         consumer.startConsumer();
         student.startStudent();
     }

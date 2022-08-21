@@ -30,11 +30,11 @@ public class Consumer {
                 try {
                     Thread.sleep(3000);
                     mathTeacher.getDiary().put(classes.getMath().take(), new Diary(estimation, date));
-                    System.out.println(Thread.currentThread().getName() + "принял студента");
+                    System.out.println(Thread.currentThread().getName() + " принял студента");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println(mathTeacher.getDiary().toString());
+                System.out.println(Thread.currentThread().getName() + mathTeacher.getDiary().toString());
             }
         }
     }, "Учитель математики");
@@ -50,11 +50,11 @@ public class Consumer {
                 try {
                     Thread.sleep(3000);
                     programmingTeacher.getDiary().put(classes.getProgramming().take(), new Diary(estimation, date));
-                    System.out.println(Thread.currentThread().getName() + "принял студента");
+                    System.out.println(Thread.currentThread().getName() + " принял студента");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println(programmingTeacher.getDiary().toString());
+                System.out.println(Thread.currentThread().getName() + programmingTeacher.getDiary().toString());
             }
         }
     }, "Учитель программирования");
@@ -71,11 +71,11 @@ public class Consumer {
                 try {
                     Thread.sleep(3000);
                     physicsTeacher.getDiary().put(classes.getPhysics().take(), new Diary(estimation, date));
-                    System.out.println(Thread.currentThread().getName() + "принял студента");
+                    System.out.println(Thread.currentThread().getName() + " принял студента");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println(physicsTeacher.getDiary().toString());
+                System.out.println(Thread.currentThread().getName() + physicsTeacher.getDiary().toString());
             }
         }
     }, "Учитель физики");
@@ -92,11 +92,11 @@ public class Consumer {
                 try {
                     Thread.sleep(3000);
                     literatureTeacher.getDiary().put(classes.getLiterature().take(), new Diary(estimation, date));
-                    System.out.println(Thread.currentThread().getName() + "принял студента");
+                    System.out.println(Thread.currentThread().getName() + " принял студента");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println(literatureTeacher.getDiary().toString());
+                System.out.println(Thread.currentThread().getName() + literatureTeacher.getDiary().toString());
             }
         }
     }, "Учитель литературы");
@@ -113,11 +113,11 @@ public class Consumer {
                 try {
                     Thread.sleep(3000);
                     physicalEducationTeacher.getDiary().put(classes.getPhysicalEducation().take(), new Diary(estimation, date));
-                    System.out.println(Thread.currentThread().getName() + "принял студента");
+                    System.out.println(Thread.currentThread().getName() + " принял студента");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println(physicalEducationTeacher.getDiary().toString());
+                System.out.println(Thread.currentThread().getName() + physicalEducationTeacher.getDiary().toString());
             }
         }
     }, "Учитель физкультуры");

@@ -29,9 +29,8 @@ public class Diary {
 
     @Override
     public String toString() {
-        return "Diary{" +
+        return
                 "estimation=" + estimation +
-                ", dateNow=" + dateNow +
-                '}';
+                ", dateNow=" + dateNow + "\n";
     }
 }
