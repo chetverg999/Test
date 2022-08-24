@@ -1,7 +1,7 @@
 public class Main {
 
     static Consumer consumer = new Consumer();
-    static Student student = new Student();
+    static Producer student = new Producer();
 
     public static void main(String[] args) {
 

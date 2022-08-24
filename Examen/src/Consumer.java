@@ -4,13 +4,13 @@ import java.util.Date;
 public class Consumer {
     Classes classes = new Classes();
     SimpleDateFormat formatForDateNow = new SimpleDateFormat(("E yyyy.MM.dd 'и время' hh:mm:ss a zzz"));
-    Teacher mathTeacher = new Teacher();
+    Teacher mathTeacher = new Teacher(); // создание преподавателей по каждому из предметов
     Teacher physicsTeacher = new Teacher();
     Teacher programmingTeacher = new Teacher();
     Teacher literatureTeacher = new Teacher();
     Teacher physicalEducationTeacher = new Teacher();
 
-    public void startConsumer() {
+    public void startConsumer() { // старт потоков (учителей)
         teacherLiterature.start();
         teacherMath.start();
         teacherPhysics.start();
@@ -18,7 +18,7 @@ public class Consumer {
         teacherPhysicalEducation.start();
     }
 
-    Thread teacherMath = new Thread(new Runnable() {
+    Thread teacherMath = new Thread(new Runnable() { // инициализация каждого из учителей
 
         @Override
         public void run() {
@@ -31,15 +31,15 @@ public class Consumer {
                     final String date = formatForDateNow.format(dateNow);
                     try {
                         Thread.sleep(3000);
-                        mathTeacher.getDiary().put(classes.getMath().take(), new Diary(estimation, date));
+                        mathTeacher.getDiary().put(classes.getMath().take(), new Diary(estimation, date)); // запись в дневник фио студента, оценки и даты
                         System.out.println(Thread.currentThread().getName() + " принял студента");
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     System.out.println(Thread.currentThread().getName() + mathTeacher.getDiary().toString());
-                    if (mathTeacher.getDiary().size() == 10) {
+                    if (mathTeacher.getDiary().size() == 20) { // проверка на прохождение всей группы через учителя
                         System.out.println("Учитель математики закончил работать");
-                        break M;
+                        break M; // завершение роботы преподавателя
                     }
                 }
             }
@@ -64,7 +64,7 @@ public class Consumer {
                         throw new RuntimeException(e);
                     }
                     System.out.println(Thread.currentThread().getName() + programmingTeacher.getDiary().toString());
-                    if (programmingTeacher.getDiary().size() == 10) {
+                    if (programmingTeacher.getDiary().size() == 20) {
                         System.out.println("Учитель программирования закончил работать");
                         break M2;
                     }
@@ -92,7 +92,7 @@ public class Consumer {
                         throw new RuntimeException(e);
                     }
                     System.out.println(Thread.currentThread().getName() + physicsTeacher.getDiary().toString());
-                    if (physicsTeacher.getDiary().size() == 10) {
+                    if (physicsTeacher.getDiary().size() == 20) {
                         System.out.println("Учитель физики закончил работать");
                         break M3;
                     }
@@ -120,7 +120,7 @@ public class Consumer {
                         throw new RuntimeException(e);
                     }
                     System.out.println(Thread.currentThread().getName() + literatureTeacher.getDiary().toString());
-                    if (literatureTeacher.getDiary().size() == 10) {
+                    if (literatureTeacher.getDiary().size() == 20) {
                         System.out.println("Учитель литературы закончил работать");
                         break M4;
                     }
@@ -148,7 +148,7 @@ public class Consumer {
                         throw new RuntimeException(e);
                     }
                     System.out.println(Thread.currentThread().getName() + physicalEducationTeacher.getDiary().toString());
-                    if (physicalEducationTeacher.getDiary().size() == 10) {
+                    if (physicalEducationTeacher.getDiary().size() == 20) {
                         System.out.println("Учитель физры закончил работать");
                         break M5;
                     }

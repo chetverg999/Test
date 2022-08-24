@@ -2,7 +2,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Semaphore;
 
-public class Classes {
+public class Classes { // создание аудиторий для сдачи экзаменов (очередей)
 
     private final BlockingQueue<StudentInfo> math = new ArrayBlockingQueue<>(3);
     private final BlockingQueue<StudentInfo> programming = new ArrayBlockingQueue<>(3);
