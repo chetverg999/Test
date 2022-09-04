@@ -1,6 +1,14 @@
+import java.util.Random;
+
 public class Student implements Runnable {
 
     Status status = new Status();
+    Random random = new Random();
+    boolean math = false;  // статус сдачи того или иного экзамена, изначально ничего не сдано
+    boolean programming = false;
+    boolean physics = false;
+    boolean literature = false;
+    boolean physicalEducation = false;
 
     @Override
     public void run() {
@@ -11,11 +19,15 @@ public class Student implements Runnable {
         }
     }
 
-    public void studentOnExamen() throws InterruptedException {
-
+    public StudentInfo InfoGen() {
         int id = (int) (Math.random() * 100);
-        int group = 8111;
+        int group = 1000 + random.nextInt(10000 - 1000);
         StudentInfo studentInfo = new StudentInfo(id, group); // генереация информации о студенте
+        return studentInfo;
+    }
+
+
+    public void studentOnExamen() throws InterruptedException {
 
         boolean math = false;  // статус сдачи того или иного экзамена, изначально ничего не сдано
         boolean programming = false;
@@ -23,7 +35,7 @@ public class Student implements Runnable {
         boolean literature = false;
         boolean physicalEducation = false;
 
-
+        StudentInfo studentInfo = InfoGen();
         ALL:
         {
             while (true) { // ученик (поток) поочередно пытается зайти в каждую аудиторию (очередь) и сдать экзамен (передать данные в очередь)
@@ -42,6 +54,8 @@ public class Student implements Runnable {
                         Main.consumer.classes.getSemaphoreMath().release(); // выход из аудитории
                     }
                 }
+
+
 
                 second:
                 {

@@ -11,7 +11,7 @@ public class StudentInfo {
     public String toString() {
         return
                 "id=" + id +
-                ", group=" + group;
+                ", group=" + group + "\n";
     }
 }
 
