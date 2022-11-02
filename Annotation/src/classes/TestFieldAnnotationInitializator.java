@@ -1,21 +1,20 @@
 package classes;
 
-import annotations.PersonAnnotation;
-import annotations.PersonFieldsAnnotation;
-
+import annotations.FieldAnnotation;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 
-public class Initializator {
-
+public class TestFieldAnnotationInitializator
+{
     private final Map<String, Object> map = new TreeMap<>();
 
     public void initialization(Object object) throws IllegalAccessException {
-        if (object.getClass().isAnnotationPresent(PersonAnnotation.class)) {
 
             FileInputStream fis;
             Properties property = new Properties();
@@ -29,15 +28,15 @@ public class Initializator {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+
             for (Field field : object.getClass().getDeclaredFields()) {
-                if (field.isAnnotationPresent(PersonFieldsAnnotation.class)) {
+                if (field.isAnnotationPresent(FieldAnnotation.class)) {
                     field.setAccessible(true);
                     String string = property.getProperty(field.getName());
                     Type type = field.getType();
-//                    System.out.println(type.getTypeName());
+
                     if(type.getTypeName().equals("java.lang.Integer")) {
                         int value = Integer.parseInt(string);
-                        //field.set(экземпляр объекта, значение поля этого объекта);
                         field.set(object, value);
                     }
                     if(type.getTypeName().equals("java.lang.Long")) {
@@ -55,4 +54,3 @@ public class Initializator {
             }
         }
     }
-}
